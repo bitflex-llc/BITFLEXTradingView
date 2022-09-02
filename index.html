@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>BITFLEX TradingView Chart</title>
 
-		<!-- Fix for iOS Safari zooming bug -->
-		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<head>
+	<title>BITFLEX TradingView Chart</title>
 
-		<script type="text/javascript" src="charting_library/charting_library.min.js"></script>
-		<script type="text/javascript" src="datafeeds/udf/dist/polyfills.js"></script>
-		<script type="text/javascript" src="datafeeds/udf/dist/bundle.js"></script>
+	<!-- Fix for iOS Safari zooming bug -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-		<script type="text/javascript">
+	<script type="text/javascript" src="charting_library/charting_library.min.js"></script>
+	<script type="text/javascript" src="datafeeds/udf/dist/polyfills.js"></script>
+	<script type="text/javascript" src="datafeeds/udf/dist/bundle.js"></script>
 
-			function getParameterByName(name) {
-				name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-				var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-					results = regex.exec(location.search);
-				return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-			}
+	<script type="text/javascript">
 
-		  function initOnReady() {
-				var widget = new TradingView.widget({
-					fullscreen: true,
-					symbol: getParameterByName('symbol'),
-					interval: 'D',
-					container_id: "tv_chart_container",
-					//	BEWARE: no trailing slash is expected in feed URL
-					datafeed: new Datafeeds.UDFCompatibleDatafeed("https://api.bit-flex.com/api/tradingviewudf"),
-					library_path: "charting_library/",
-					locale: getParameterByName('lang') || "en",
-					theme: "dark",
-					disabled_features: ["use_localstorage_for_settings"],
-					preset: "mobile",
-					overrides: {
-						"paneProperties.background": "red",
-						"paneProperties.vertGridProperties.color": "rgba(220,20,60,0.15)",
-						"paneProperties.horzGridProperties.color": "rgba(220,20,60,0.15)",
-						"scalesProperties.textColor" : "#F1F1F1",
-						"scalesProperties.backgroundColor" : "rgba(220,20,60,0.15)",
-						"scalesProperties.lineColor":"rgba(220,20,60,0.15)",
-						"paneProperties.bottomMargin":"2",
-						"symbolWatermarkProperties.color" : "rgba(0, 0, 0, 0.05)"
-						// "paneProperties.topMargin":"",
-						// "paneProperties.topMargin":""
-					}
-				});
-			};
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+				results = regex.exec(location.search);
+			return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
 
-			window.addEventListener('DOMContentLoaded', initOnReady, false);
-		</script>
+		function initOnReady() {
+			var widget = new TradingView.widget({
+				fullscreen: true,
+				symbol: getParameterByName('symbol'),
+				interval: 'D',
+				container_id: "tv_chart_container",
+				//	BEWARE: no trailing slash is expected in feed URL
+				datafeed: new Datafeeds.UDFCompatibleDatafeed("https://api.bit-flex.com/api/tradingview"),
+				library_path: "charting_library/",
+				locale: getParameterByName('lang') || "en",
+				theme: "dark",
+				disabled_features: ["use_localstorage_for_settings"],
+				preset: "mobile",
+				overrides: {
+					"paneProperties.background": "#14181f",
 
-	</head>
+					'mainSeriesProperties.candleStyle.upColor': 'rgb(30, 233, 149)',
+					'mainSeriesProperties.candleStyle.downColor': 'rgb(248, 73, 96)',
+					'mainSeriesProperties.candleStyle.drawWick': true,
+					'mainSeriesProperties.candleStyle.drawBorder': true,
+					'mainSeriesProperties.candleStyle.borderColor': 'rgb(30, 233, 149)',
+					'mainSeriesProperties.candleStyle.borderUpColor': 'rgb(30, 233, 149)',
+					'mainSeriesProperties.candleStyle.borderDownColor': 'rgb(248, 73, 96)',
+					// 'mainSeriesProperties.candleStyle.wickColor': '#737375',
+					'mainSeriesProperties.candleStyle.wickUpColor': 'rgb(30, 233, 149)',
+					'mainSeriesProperties.candleStyle.wickDownColor': 'rgb(248, 73, 96)',
+				}
+			});
+		};
 
-	<body style="width: 100%; height: 100%; margin: 0 !important;padding: 0 !important; background-color: #14181e;">
-		<div id="tv_chart_container" style="width: 100%; height: 100%;"></div>
-	</body>
+		window.addEventListener('DOMContentLoaded', initOnReady, false);
+	</script>
+
+</head>
+
+<body style="width: 100%; height: 100%; margin: 0 !important;padding: 0 !important; background-color: #14181e;">
+	<div id="tv_chart_container" style="width: 100%; height: 100%;"></div>
+</body>
 
 </html>
